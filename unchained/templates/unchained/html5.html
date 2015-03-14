@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{% block language %}en{% endblock %}">
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{% block styles %}{% endblock %}
+	</head>
+	<body>
+		{% block page %}{% endblock %}
+
+		{% block scripts %}{% endblock %}
+	</body>
+</html>
+

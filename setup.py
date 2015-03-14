@@ -19,7 +19,9 @@ setup(
 	author_email         = 'james.durand@alumni.msoe.edu',
 	packages             = find_packages(),
 	include_package_data = True,
-	package_data         = [],
+	package_data         = {
+		'': ['*.html'],
+	},
 	install_requires     = DEPENDENCIES,
 )
 

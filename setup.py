@@ -11,7 +11,7 @@ with open('requirements.txt', 'r') as file_handle:
 
 setup(
 	name                 = 'unchained',
-	version              = '1.1.0',
+	version              = '1.2.0',
 	url                  = 'https://github.com/durandj/unchained',
 	license              = 'MIT',
 	description          = 'Tools for getting Django setup quickly',

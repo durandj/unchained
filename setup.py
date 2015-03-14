@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os.path
 from setuptools import setup, find_packages
 
 with open('README.md', 'r') as file_handle:
@@ -20,7 +21,9 @@ setup(
 	packages             = find_packages(),
 	include_package_data = True,
 	package_data         = {
-		'': ['*.html'],
+		'unchained': [
+			os.path.join('templates', 'unchained', '*.html'),
+		],
 	},
 	install_requires     = DEPENDENCIES,
 )

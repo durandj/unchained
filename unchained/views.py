@@ -67,7 +67,7 @@ class LogoutView(django.views.generic.TemplateView):
 
 	def get_default_redirect(self):
 		if not self.default_redirect:
-			raise django.views.generic.GenericViewError(
+			raise django.core.exceptions.ImproperlyConfigured(
 				"LogoutView requires either the 'default_redirect' attribute "
 				"be set or the 'get_default_redirect' method be overriden"
 			)

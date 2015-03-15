@@ -35,6 +35,13 @@ class LoginView(django.views.generic.FormView):
 	form_class          = django.contrib.auth.forms.AuthenticationForm
 	redirect_field_name = 'next'
 
+	def get_context_data(self, **kwargs):
+		context = super(LoginView, self).get_context_data(**kwargs)
+
+		context[self.redirect_field_name] = self.request.GET[self.redirect_field_name]
+
+		return context
+
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated():
 			return django.shortcuts.redirect(self.get_success_url())

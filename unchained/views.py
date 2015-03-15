@@ -2,11 +2,34 @@ import django.shortcuts
 from django.conf import settings
 import django.contrib.auth
 import django.contrib.auth.forms
+import django.core.exceptions
 import django.core.urlresolvers
 import django.utils.http
 import django.views.generic
 
 # pylint: disable=too-many-ancestors
+
+class ViewDecoratorMixin(object):
+	decorators = []
+
+	@classmethod
+	def as_view(cls, **initkwargs):
+		view = super(ViewDecoratorMixin, cls).as_view(**initkwargs)
+
+		for decorator in cls.get_decorators():
+			view = decorator(view)
+
+		return view
+
+	@classmethod
+	def get_decorators(cls):
+		if not cls.decorators:
+			raise django.core.exceptions.ImproperlyConfigured(
+				"ViewDecoratorMixin requires you to either set the 'decorators'"
+				" class attribute or override the 'get_decorators' method."
+			)
+
+		return cls.decorators
 
 class LoginView(django.views.generic.FormView):
 	form_class          = django.contrib.auth.forms.AuthenticationForm

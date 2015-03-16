@@ -87,26 +87,65 @@ If no user is logged in an error is thrown. You can also specify what image size
 ways to specify both of these parameters.
 
 Method 1:
+
 	{% gravatar user 90 %}
 
 Method 2:
+
 	{% gravatar user=user size=90 %}
 
 #### HTML
 
 It's important to know how to write proper HTML but sometimes its just a waste of time to write the same thing 101 times.
 
+To include these tags in your template just do this:
+
+	{% load html %}
+
 ##### stylesheet
+
+The stylesheet does what it sounds like, generate a link tag pointing to the given stylesheet. So instead of typing
+
+	<link rel="stylesheet" href="{% static 'mystylesheet.css' %}" />
+
+You can simply do
+
+	{% stylesheet 'mystylesheet.css' %}
+
+Note that this also works with a full URL like `http://example.com/mystylesheet.css`.
 
 ##### script
 
+The script tag works just like the stylesheet tag except that, well, it generates a script tag. Usage is also the same.
+
+	{% script 'myscript.js' %}
+
 ### Views
+
+We also include some views and view mixins to make working with Django easier.
 
 #### ViewDecoratorMixin
 
+Try adding a decorator like the `login_required` mixin to a class based view. It gets hairy. This gets even hairier when you have inherited views adding their
+own decorators. Why not just add them in one place. Note that this builds off of the example from the
+[Django documentation](https://docs.djangoproject.com/en/1.7/topics/class-based-views/intro/#mixins-that-wrap-as-view).
+
+	class LoginRequiredMixin(ViewDecoratorMixin):
+		decorators = [login_required]
+
 #### LoginView
 
+A class based view version of Django's login system.
+
+	class MyLoginView(LoginView):
+		template_name = 'login.html'
+
 #### LogoutView
+
+A class based view version of Django's logout system.
+
+	class MyLogoutView(LogoutView):
+		template_name = 'logout.html'
 
 ## Notes
 

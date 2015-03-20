@@ -38,7 +38,12 @@ class LoginView(django.views.generic.FormView):
 	def get_context_data(self, **kwargs):
 		context = super(LoginView, self).get_context_data(**kwargs)
 
-		context[self.redirect_field_name] = self.request.GET[self.redirect_field_name]
+		if self.redirect_field_name in self.request.GET:
+			url = self.request.GET[self.redirect_field_name]
+		else:
+			url = self.get_success_url()
+
+		context[self.redirect_field_name] = url
 
 		return context
 
